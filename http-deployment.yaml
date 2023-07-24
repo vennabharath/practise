@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deployment-test
+  namespace: default
+  labels:
+    app: httpd_app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: httpd_app
+  template:
+    metadata:
+      labels:
+        app: httpd_app
+    spec:
+      containers:
+        - name: httpd-container
+          image: httpd:latest
+          ports:
+            - containerPort: 80
+        - name: logstash-container
+          image: logstash:latest
+
